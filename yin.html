@@ -1,0 +1,182 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title></title>
+  <link rel="stylesheet" href="./css/yin.css">
+  
+</head>
+
+<body>
+    <div class="top">
+        <img src="./img/bg.jpg" alt="">
+    </div>
+    <div class="header">
+        <img src="./img/logo.png" alt="">
+        <!-- 导航条部分 -->
+        <div class="nav">
+            <ul> 
+                <li>
+                    <a href="./yin.html">
+                        <!-- <img id="home" src="./img/home.png" alt=""> -->
+                    </a>
+                </li>
+                <li>
+                    <a href="./index.html">首页</a>
+                </li>
+                <li>
+                    <a href="./she.html">社区</a>
+                </li>
+                <li>
+                    <a href="./yin.html">我的生活</a>
+                </li>
+                <li>
+                    <a href="./gong.html">重要性</a>
+                </li>
+            </ul>
+        </div>
+    </div>
+    <div class="name"><h1>银杏</h1></div>
+  <div id="main">
+    <div id="click-section">
+      <div id="drawerboxes">
+        <div class="drawerbox active">
+          <button class="drawer-btn active" onclick="slideTo(1)">形态特征<span
+              class="drawer-head">1</span></button>
+        </div>
+        <div class="drawerbox">
+          <button class="drawer-btn" onclick="slideTo(2)">分布地<span
+              class="drawer-head">2</span></button>
+        </div>
+        <div class="drawerbox">
+          <button class="drawer-btn" onclick="slideTo(3)">习性<span class="drawer-head">3</span></button>
+        </div>
+        <div class="drawerbox">
+          <button class="drawer-btn" onclick="slideTo(4)">濒危原因<span class="drawer-head">4</span></button>
+        </div>
+      </div>
+    </div>
+    <div id="slide-section">
+      <div id="slide-bar">
+        <div id="bar"></div>
+      </div>
+      <div id="card-section">
+        <div id="card1" class="card">
+          <div class="card-small-title">形态特征</div>
+          <div class="card-title">生活型:乔木;<br>
+            株:高达40米，胸径4米<br>
+            茎:树皮灰褐色，纵裂<br>
+            枝:大枝斜展，一年生长枝淡褐黄色，二年生枝变灰色;短枝黑灰色<br>
+            叶:叶扇形，上部宽5-8厘米，上缘有浅或深的波状缺刻，有时中部缺裂较深，基部楔形，有长柄;在短枝上3-8叶簇生<br>
+            花:雄球花4-6生于短枝顶端叶腋或苞腋，长圆形，下垂，淡黄色;雌球花数个生于短枝叶丛中，淡绿色。</div>
+          <!-- <div class="card-content"></div> -->
+          <div class="card-img">
+            <img src="./img/29.jpg" alt="">
+          </div>
+        </div>
+        <div id="card2" class="card">
+          <div class="card-small-title">分布地</div>
+          <div class="card-title">国内产地:仅浙江天目山有野生状态的树木，银杏的栽培区甚广:北自东北沈阳，南达广州，东起华东海拔40-1000m地带，西南至贵州、云南西部(腾冲)海拔2000m以下地带均有栽培<br>
+            国外分布:朝鲜、日本、欧美各国庭院亦有栽培。</div>
+          <!-- <div class="card-content"> </div> -->
+          <div class="card-img">
+            <img src="./img/30.jpg" alt="">
+          </div>
+        </div>
+        <div id="card3" class="card">
+          <div class="card-small-title">习性</div>
+          <div class="card-title">海拔:500-1000m;<br>
+            物候期:花期3月下旬至4月中旬，种子9-10月成熟，生活在酸性(pH值5-5.5)黄壤、排水良好地带的天然林中，常与柳杉、榧树、蓝果树等针阔叶树种混生，生长旺盛。</div>
+          <!-- <div class="card-content"></div> -->
+          <div class="card-img">
+            <img src="./img/31.jpg" alt="">
+          </div>
+        </div>
+        <div id="card4" class="card">
+          <div class="card-small-title">濒危原因</div>
+          <div class="card-title">银杏是世界上最古老的孑遗植物之一。别看它现在随处可见，但目前的银杏绝大多数都是人工栽培的。
+            判断植物珍稀程度的标准，数量并非是决定性的因素，其基因的多样性和野生种群的分布情况才是最重要的。目前银杏野生种群的分布和数量都极为稀少，且城市行道树中的银杏多为“近亲繁殖"，无法增加银杏的基因多样性。只有天然存在的银杏，才能代表这个物种的遗传多样性，也只有保护好天然的银查资源，才能直正保护这个古老的物种。</div>
+          <!-- <div class="card-content"></div> -->
+          <div class="card-img">
+            <img src="./img/32.jpg" alt="">
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+  <script>
+    // 定义变量 
+    let chosenSlideNumber = 1; // 当前选择的幻灯片编号 
+    let offset = 0; // 幻灯片偏移量 
+    let barOffset = 0; // 导航条偏移量 
+    let intervalID; // 定时器 ID 
+    // 启动幻灯片轮播 
+    startSlide();
+    // 获取所有抽屉按钮，并为每个按钮添加点击事件监听器 
+    const drawerBtns = Array.from(document.querySelectorAll(".drawer-btn"));
+    drawerBtns.forEach(btn => {
+      btn.addEventListener("click", () => {
+        clearInterval(intervalID); // 清除定时器 
+        startSlide(); // 重新启动幻灯片轮播 
+      })
+    })
+    // 获取幻灯片区域 
+    const slideSection = document.querySelector("#slide-section");
+    // 鼠标移入幻灯片区域时清除定时器 
+    slideSection.addEventListener("mouseenter", () => {
+      clearInterval(intervalID);
+    })
+    // 鼠标移出幻灯片区域时重新启动幻灯片轮播 
+    slideSection.addEventListener("mouseleave", () => {
+      startSlide();
+    })
+    // 切换到指定编号的幻灯片 
+    function slideTo(slideNumber) {
+      drawerboxToggle(slideNumber); // 切换抽屉面板状态 
+      drawerbtnToggle(slideNumber); // 切换抽屉按钮状态 
+      // 更新偏移量 
+      let previousSlideNumber = chosenSlideNumber;
+      chosenSlideNumber = slideNumber;
+      offset += (chosenSlideNumber - previousSlideNumber) * (-100); // 计算幻灯片偏移量 
+      barOffset += (chosenSlideNumber - previousSlideNumber) * (100); // 计算导航条偏移量 
+      barSlide(barOffset); // 移动导航条 
+      // 获取所有幻灯片，为每个幻灯片设置偏移量 
+      const slides = document.querySelectorAll(".card");
+      Array.from(slides).forEach(slide => {
+        slide.style.transform = `translateY(${offset}%)`;
+      })
+    }
+    // 切换抽屉面板状态 
+    function drawerboxToggle(drawerboxNumber) {
+      let prevDrawerboxNumber = chosenSlideNumber;
+      const drawerboxes = document.querySelectorAll(".drawerbox");
+      drawerboxes[prevDrawerboxNumber - 1].classList.toggle("active"); // 切换前一个抽屉面板的状态 
+      drawerboxes[drawerboxNumber - 1].classList.toggle("active"); // 切换当前抽屉面板的状态 
+    }
+    // 切换抽屉按钮状态 
+    function drawerbtnToggle(drawerBtnNumber) {
+      let prevDrawerBtnNumber = chosenSlideNumber;
+      const drawerBtns = document.querySelectorAll(".drawer-btn");
+      drawerBtns[prevDrawerBtnNumber - 1].classList.toggle("active"); // 切换前一个抽屉按钮的状态 
+      drawerBtns[drawerBtnNumber - 1].classList.toggle("active"); // 切换当前抽屉按钮的状态 
+    }
+    // 移动导航条 
+    function barSlide(barOffset) {
+      const bar = document.querySelector("#bar");
+      bar.style.transform = `translateY(${barOffset}%)`;
+    }
+    // 启动幻灯片轮播 
+    function startSlide() {
+      intervalID = setInterval(() => {
+        slideTo(chosenSlideNumber % 4 + 1); // 每次切换到下一个幻灯片 
+      }, 3000); // 每隔 3 秒自动切换幻灯片 
+    }
+
+
+
+  </script>
+</body>
+
+</html>

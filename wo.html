@@ -1,0 +1,179 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>转折点之我的生活</title>
+  <link rel="stylesheet" href="./css/wo.css">
+  
+</head>
+
+<body>
+    <div class="top">
+        <img src="./img/bg.jpg" alt="">
+    </div>
+    <div class="header">
+        <img src="./img/logo.png" alt="">
+        <!-- 导航条部分 -->
+        <div class="nav">
+            <ul> 
+                <li>
+                    <a href="./wo.html">
+                        <!-- <img id="home" src="./img/home.png" alt=""> -->
+                    </a>
+                </li>
+                <li>
+                    <a href="./index.html">首页</a>
+                </li>
+                <li>
+                    <a href="./she.html">社区</a>
+                </li>
+                <li>
+                    <a href="./wo.html">我的生活</a>
+                </li>
+                <li>
+                    <a href="./gong.html">共建家园</a>
+                </li>
+            </ul>
+        </div>
+    </div>
+    <div class="name"><h1>白头硬尾鸭</h1></div>
+  <div id="main">
+    <div id="click-section">
+      <div id="drawerboxes">
+        <div class="drawerbox active">
+          <button class="drawer-btn active" onclick="slideTo(1)">形态特征<span
+              class="drawer-head">1</span></button>
+        </div>
+        <div class="drawerbox">
+          <button class="drawer-btn" onclick="slideTo(2)">分布地<span
+              class="drawer-head">2</span></button>
+        </div>
+        <div class="drawerbox">
+          <button class="drawer-btn" onclick="slideTo(3)">习性<span class="drawer-head">3</span></button>
+        </div>
+        <div class="drawerbox">
+          <button class="drawer-btn" onclick="slideTo(4)">濒危原因<span class="drawer-head">4</span></button>
+        </div>
+      </div>
+    </div>
+    <div id="slide-section">
+      <div id="slide-bar">
+        <div id="bar"></div>
+      </div>
+      <div id="card-section">
+        <div id="card1" class="card">
+          <div class="card-small-title">形态特征</div>
+          <div class="card-title">体长约45厘米。雄鸟头部白色，头顶、领部为黑色，其余体色为粟褐色，嘴基部膨大，呈蓝色;雌鸟体色为暗褐色，头部及后颈为黑褐色，颊部具1条细的白色横纹与白色的上颈相连，嘴黑色。雌雄尾均黑褐色，硬且长。</div>
+          <!-- <div class="card-content"></div> -->
+          <div class="card-img">
+            <img src="./img/40.jpg" alt="">
+          </div>
+        </div>
+        <div id="card2" class="card">
+          <div class="card-small-title">分布地</div>
+          <div class="card-title">分布于阿富汗、阿尔及利亚、亚美尼亚、阿塞拜疆、保加利亚、中国、塞浦路斯、格鲁吉亚、希腊、印度、伊朗伊斯兰共和国、伊拉克、以色列、约旦、哈萨克斯坦、吉尔吉斯斯坦、蒙古、摩洛哥、巴基斯坦、罗马尼亚、西班牙、叙利亚、塔吉克斯坦、突尼斯、土耳其、土库曼斯坦、乌克兰、乌兹别克斯坦。</div>
+          <!-- <div class="card-content"> </div> -->
+          <div class="card-img">
+            <img src="./img/41.jpg" alt="">
+          </div>
+        </div>
+        <div id="card3" class="card">
+          <div class="card-small-title">习性</div>
+          <div class="card-title">善游泳和潜水。常在靠近水生植物的水域中活动。游泳时尾向上翘起。能轻盈地飘浮在水而，也能将身体沉入水中。一般不上陆地活动，也很少飞翔。在地上行走困难，起飞也很笨拙。主要以鱼类、甲壳类和软体动物等动物为食，也吃植物的芽、叶和幼苗等植物性食物。</div>
+          <!-- <div class="card-content"></div> -->
+          <div class="card-img">
+            <img src="./img/42.jpg" alt="">
+          </div>
+        </div>
+        <div id="card4" class="card">
+          <div class="card-small-title">濒危原因</div>
+          <div class="card-title">保护级别:
+            列入《世界自然保护联盟濒危物种红色名录》 
+<br>
+             濒危原因:
+            1、环境污染
+            2、栖息地的丧失。</div>
+          <!-- <div class="card-content"></div> -->
+          <div class="card-img">
+            <img src="./img/43.jpg" alt="">
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+  <script>
+    // 定义变量 
+    let chosenSlideNumber = 1; // 当前选择的幻灯片编号 
+    let offset = 0; // 幻灯片偏移量 
+    let barOffset = 0; // 导航条偏移量 
+    let intervalID; // 定时器 ID 
+    // 启动幻灯片轮播 
+    startSlide();
+    // 获取所有抽屉按钮，并为每个按钮添加点击事件监听器 
+    const drawerBtns = Array.from(document.querySelectorAll(".drawer-btn"));
+    drawerBtns.forEach(btn => {
+      btn.addEventListener("click", () => {
+        clearInterval(intervalID); // 清除定时器 
+        startSlide(); // 重新启动幻灯片轮播 
+      })
+    })
+    // 获取幻灯片区域 
+    const slideSection = document.querySelector("#slide-section");
+    // 鼠标移入幻灯片区域时清除定时器 
+    slideSection.addEventListener("mouseenter", () => {
+      clearInterval(intervalID);
+    })
+    // 鼠标移出幻灯片区域时重新启动幻灯片轮播 
+    slideSection.addEventListener("mouseleave", () => {
+      startSlide();
+    })
+    // 切换到指定编号的幻灯片 
+    function slideTo(slideNumber) {
+      drawerboxToggle(slideNumber); // 切换抽屉面板状态 
+      drawerbtnToggle(slideNumber); // 切换抽屉按钮状态 
+      // 更新偏移量 
+      let previousSlideNumber = chosenSlideNumber;
+      chosenSlideNumber = slideNumber;
+      offset += (chosenSlideNumber - previousSlideNumber) * (-100); // 计算幻灯片偏移量 
+      barOffset += (chosenSlideNumber - previousSlideNumber) * (100); // 计算导航条偏移量 
+      barSlide(barOffset); // 移动导航条 
+      // 获取所有幻灯片，为每个幻灯片设置偏移量 
+      const slides = document.querySelectorAll(".card");
+      Array.from(slides).forEach(slide => {
+        slide.style.transform = `translateY(${offset}%)`;
+      })
+    }
+    // 切换抽屉面板状态 
+    function drawerboxToggle(drawerboxNumber) {
+      let prevDrawerboxNumber = chosenSlideNumber;
+      const drawerboxes = document.querySelectorAll(".drawerbox");
+      drawerboxes[prevDrawerboxNumber - 1].classList.toggle("active"); // 切换前一个抽屉面板的状态 
+      drawerboxes[drawerboxNumber - 1].classList.toggle("active"); // 切换当前抽屉面板的状态 
+    }
+    // 切换抽屉按钮状态 
+    function drawerbtnToggle(drawerBtnNumber) {
+      let prevDrawerBtnNumber = chosenSlideNumber;
+      const drawerBtns = document.querySelectorAll(".drawer-btn");
+      drawerBtns[prevDrawerBtnNumber - 1].classList.toggle("active"); // 切换前一个抽屉按钮的状态 
+      drawerBtns[drawerBtnNumber - 1].classList.toggle("active"); // 切换当前抽屉按钮的状态 
+    }
+    // 移动导航条 
+    function barSlide(barOffset) {
+      const bar = document.querySelector("#bar");
+      bar.style.transform = `translateY(${barOffset}%)`;
+    }
+    // 启动幻灯片轮播 
+    function startSlide() {
+      intervalID = setInterval(() => {
+        slideTo(chosenSlideNumber % 4 + 1); // 每次切换到下一个幻灯片 
+      }, 3000); // 每隔 3 秒自动切换幻灯片 
+    }
+
+
+
+  </script>
+</body>
+
+</html>
